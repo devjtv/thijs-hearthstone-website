@@ -4,6 +4,7 @@ import axios from "axios";
 import { parseCookies } from "nookies";
 import Hero from "../components/Hero";
 import DeckItem from "../components/DeckItem";
+import { classConfig } from "../utils/constants";
 
 export default function Home({ userProfile }) {
   const [code, setCode] = useState(
@@ -13,7 +14,6 @@ export default function Home({ userProfile }) {
 
   const loadDeck = () => {
     axios.get("/api/fetchDeck", { params: { code } }).then((response) => {
-      console.log(response);
       if (response.data) {
         setDeck(response.data.data);
       }
@@ -21,7 +21,7 @@ export default function Home({ userProfile }) {
   };
 
   useEffect(() => {
-    console.log("Loaded!", userProfile);
+    // console.log("Loaded!", userProfile);
   }, []);
 
   return (
@@ -30,11 +30,9 @@ export default function Home({ userProfile }) {
 
       <div className="container pt-12 mx-auto">
         <div className="flex flex-col gap-6">
-          <DeckItem />
-          <DeckItem />
-          <DeckItem />
-          <DeckItem />
-          <DeckItem />
+          {Object.keys(classConfig).map((type) => (
+            <DeckItem type={type} />
+          ))}
         </div>
       </div>
     </>
@@ -47,7 +45,6 @@ export const getServerSideProps = async (context) => {
     ? JSON.parse(cookies.userProfile)
     : null;
 
-  console.log(userProfile);
   return {
     props: {
       userProfile, // Pass this to the page as a prop

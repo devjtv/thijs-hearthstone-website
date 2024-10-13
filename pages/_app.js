@@ -1,6 +1,8 @@
 import Head from "next/head";
 import "../styles/globals.scss";
+import 'react-tippy/dist/tippy.css';
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const MyApp = ({ Component, pageProps }) => {
   return <>
@@ -31,6 +33,7 @@ const MyApp = ({ Component, pageProps }) => {
       <main>
         <Header />
         <Component {...pageProps} />
+        <Footer />
       </main>
   </>;
 };

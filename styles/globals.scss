@@ -11,3 +11,16 @@ body {
   font-style: normal;
   color: #FFF;
 }
+
+main {
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 14rem;
+}
+
+.tippy-popper > * {
+  font-size: 1rem !important;
+  line-height: 1rem;
+  font-family: "Arial", sans-serif !important;
+  font-weight: 500;
+}

@@ -9,6 +9,7 @@
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/joy": "^5.0.0-beta.19",
+    "@tabler/icons-react": "^3.19.0",
     "axios": "^1.6.2",
     "express-session": "^1.17.3",
     "mongodb": "^4.8.1",
@@ -20,6 +21,7 @@
     "passport-twitch-new": "^0.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-tippy": "^1.4.0",
     "sass": "^1.69.5"
   },
   "devDependencies": {
