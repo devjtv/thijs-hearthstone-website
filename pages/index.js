@@ -5,33 +5,45 @@ import { parseCookies } from "nookies";
 import Hero from "../components/Hero";
 import DeckItem from "../components/DeckItem";
 import { classConfig } from "../utils/constants";
+import { Button } from "@mui/joy";
+import DeckCard from "../components/DeckCard";
+import { sortCards } from "../utils/functions";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Home({ userProfile }) {
-  const [code, setCode] = useState(
-    "AAECAea5AwLlsATZ0AUOiLIEmLoE+b8EpeIElaoF5OQF4fgFxfkFkIMGhY4GhpAGiZAGjZAGnJoGAA=="
-  );
-  const [deck, setDeck] = useState(null);
 
-  const loadDeck = () => {
-    axios.get("/api/fetchDeck", { params: { code } }).then((response) => {
-      if (response.data) {
-        setDeck(response.data.data);
-      }
-    });
+  // Get Decks Function
+  const getDecks = async (page = 1, limit = 10) => {
+    const response = await axios.get("/api/getDecks", { params: { page, limit } });
+    return response.data;
   };
 
+  // Setup Tanstack Query
+  const { data: decks, isLoading, isError, error, isFetched, isSuccess } = useQuery({
+    queryKey: ["decks"],
+    queryFn: getDecks,
+    enabled: true,
+    refetchInterval: 5000
+  });
+
   useEffect(() => {
-    // console.log("Loaded!", userProfile);
-  }, []);
+    if(isSuccess) {
+      console.log("Decks Loaded Successfully!");
+      
+      if(decks?.data?.length === 0) {
+        console.log("No Decks Found");
+      }
+    }
+  }, [isSuccess]);
 
   return (
     <>
       <Hero title="Decks" image="/images/backgrounds/bg-hero.png" />
 
-      <div className="container pt-12 mx-auto">
+      <div className="container pt-12 mx-auto px-4 md:px-8">
         <div className="flex flex-col gap-6">
-          {Object.keys(classConfig).map((type) => (
-            <DeckItem type={type} />
+          {isSuccess && decks?.data?.length > 0 && decks.data.map((deck) => (
+            <DeckItem deck={deck} />
           ))}
         </div>
       </div>
