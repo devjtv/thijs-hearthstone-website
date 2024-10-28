@@ -104,9 +104,13 @@ export default function AddDeck() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        
+        // Convert deckDate to a Unix timestamp in seconds
+        const unixTimestamp = Math.floor(new Date(deckDate).getTime() / 1000);
+        
         submitDeck.mutate({
             deckName,
-            deckDate: deckDate,
+            deckDate: unixTimestamp, // Use the Unix timestamp instead of the date string
             deckArchetype, // Include the selected archetype in the submission
             deckData: JSON.stringify(deck)
         });
