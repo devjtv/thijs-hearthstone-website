@@ -19,7 +19,7 @@ export default async (req, res) => {
 
     const decks = await decksCollection
       .find({})
-      .sort({deckDate: -1, deckSubmitted: -1})
+      .sort({ deckDate: -1, dateSubmitted: -1 }) // Sort by deckDate and then by dateSubmitted in descending order
       .skip(skip)
       .limit(limitNumber)
       .toArray();

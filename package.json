@@ -15,7 +15,7 @@
     "bcryptjs": "^2.4.3",
     "express-session": "^1.17.3",
     "mongodb": "^4.8.1",
-    "next": "^15.0.1",
+    "next": "latest",
     "next-connect": "^1.0.0",
     "nookies": "^2.5.2",
     "passport": "^0.7.0",
