@@ -21,15 +21,15 @@
     "passport": "^0.7.0",
     "passport-oauth": "^1.0.0",
     "passport-twitch-new": "^0.0.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-tippy": "^1.4.0",
     "react-toastify": "^10.0.6",
     "sass": "^1.69.5"
   },
   "devDependencies": {
     "@types/node": "18.7.5",
-    "@types/react": "16.9.17",
+    "@types/react": "^18.3.12",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.4.0",
