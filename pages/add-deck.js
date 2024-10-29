@@ -52,7 +52,6 @@ export default function AddDeck() {
     const submitDeck = useMutation({
         mutationFn: async (deckData) => {
             const response = await axios.post("/api/addDeck", deckData);
-            console.log(response.data);
             return response.data;
         },
         onSuccess: (data) => {

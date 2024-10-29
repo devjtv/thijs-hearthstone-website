@@ -80,7 +80,6 @@ export const calculateDeckDustCost = (data) => {
         sideboardCards.forEach((sideboardCard) => {
             sideboardCard.cardsInSideboard.forEach((card) => {
                 if( card.collectible == 1 && typeof card.rarityId !== 'undefined' && card.cardSetId !== 1637) {
-                    console.log(card.name);
                     dustCost += rarityIdToDustCost[card.rarityId];
                 }
             });
@@ -91,7 +90,6 @@ export const calculateDeckDustCost = (data) => {
     // Check Main Cards
     cards.forEach((card) => {
         if( card.collectible == 1 && typeof card.rarityId !== 'undefined' && card.cardSetId !== 1637) {
-            console.log(card.name, rarityIdToDustCost[card.rarityId]);
             dustCost += rarityIdToDustCost[card.rarityId];
         }
     });

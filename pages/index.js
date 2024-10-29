@@ -11,6 +11,9 @@ import { sortCards } from "../utils/functions";
 import { useQuery } from "@tanstack/react-query";
 
 export default function Home({ userProfile }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [allDecks, setAllDecks] = useState([]);
+  const [noMoreDecks, setNoMoreDecks] = useState(false);
 
   // Get Decks Function
   const getDecks = async (page = 1, limit = 10) => {
@@ -20,21 +23,30 @@ export default function Home({ userProfile }) {
 
   // Setup Tanstack Query
   const { data: decks, isLoading, isError, error, isFetched, isSuccess } = useQuery({
-    queryKey: ["decks"],
-    queryFn: getDecks,
+    queryKey: ["decks", currentPage],
+    queryFn: () => getDecks(currentPage),
     enabled: true,
-    refetchInterval: 5000
+    refetchInterval: 5000,
   });
 
+  // Effect to update allDecks when decks data is fetched
   useEffect(() => {
-    if(isSuccess) {
+    if (isSuccess && decks) {
+      setAllDecks((prevDecks) => [...prevDecks, ...decks.data]);
       console.log("Decks Loaded Successfully!");
       
-      if(decks?.data?.length === 0) {
+      if (decks.data.length === 0) {
         console.log("No Decks Found");
+        setNoMoreDecks(true);
+
       }
     }
-  }, [isSuccess]);
+  }, [isSuccess, decks]);
+
+  // Load more function
+  const loadMoreDecks = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
 
   return (
     <>
@@ -42,10 +54,16 @@ export default function Home({ userProfile }) {
 
       <div className="container pt-12 mx-auto px-4 md:px-8">
         <div className="flex flex-col gap-6">
-          {isSuccess && decks?.data?.length > 0 && decks.data.map((deck) => (
-            <DeckItem deck={deck} />
+          {allDecks.length > 0 && allDecks.map((deck) => (
+            <DeckItem key={deck.id} deck={deck} /> // Ensure to provide a unique key
           ))}
         </div>
+        {isError && <p>Error: {error.message}</p>}
+        
+        {!noMoreDecks && <Button onClick={loadMoreDecks} disabled={isLoading} className="bg-highlight w-full mt-12 py-4 text-background hover:bg-backgroundLight hover:text-white transition-all duration-300">
+          Load More
+        </Button>}
+        
       </div>
     </>
   );
