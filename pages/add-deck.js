@@ -131,19 +131,19 @@ export default function AddDeck() {
                     onChange={(e) => setCode(e.target.value)}
                 />
 
-                <Button
-                    className="bg-highlight w-full mt-2 py-4 text-background hover:bg-backgroundLight hover:text-white transition-all duration-300"
+                <button
+                    className="bg-highlight w-full text-lg rounded-lg mt-2 py-4 text-background hover:bg-backgroundLight hover:text-white transition-all duration-300"
                     onClick={loadDeck}
                     disabled={isLoading}
                 >
                     {isLoading ? "Loading..." : "Load Deck"}
-                </Button>
+                </button>
             </div>
 
             {isError && <div className="text-red-500 container mx-auto mt-4">Error: {error.message}</div>}
 
             {deck && (
-                <form onSubmit={handleSubmit} className="container mx-auto mt-12 space-y-6">
+                <form onSubmit={handleSubmit} className="container mx-auto mt-12 px-8 space-y-6">
                     <div>
                         <label htmlFor="deckName" className="block text-xl text-white">Deck Name</label>
                         <input
@@ -212,13 +212,13 @@ export default function AddDeck() {
                         </div>
                     </div>
 
-                    <Button
+                    <button
                         type="submit"
-                        className="bg-highlight w-full mt-2 py-4 text-background hover:bg-backgroundLight hover:text-white transition-all duration-300"
+                        className="bg-highlight w-full text-lg rounded-lg mt-2 py-4 text-background hover:bg-backgroundLight hover:text-white transition-all duration-300"
                         disabled={submitDeck.isLoading}
                     >
                         {submitDeck.isLoading ? "Submitting..." : "Submit Deck"}
-                    </Button>
+                    </button>
                 </form>
             )}
         </ProtectedRoute>

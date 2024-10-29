@@ -60,9 +60,12 @@ export default function Home({ userProfile }) {
         </div>
         {isError && <p>Error: {error.message}</p>}
         
-        {!noMoreDecks && <Button onClick={loadMoreDecks} disabled={isLoading} className="bg-highlight w-full mt-12 py-4 text-background hover:bg-backgroundLight hover:text-white transition-all duration-300">
-          Load More
-        </Button>}
+        {!noMoreDecks && 
+          <button onClick={loadMoreDecks} disabled={isLoading} className="bg-highlight w-full mt-6 py-4 text-background hover:bg-backgroundLight hover:text-white transition-all text-lg rounded-lg
+            duration-300">
+              Load More
+          </button>
+        }
         
       </div>
     </>
